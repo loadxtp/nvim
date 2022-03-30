@@ -95,8 +95,7 @@ map("n", "s=", "<C-w>=", opt)
 local pluginKeys = {}
 
 -- symbols-outline
-map("n", "<leader>l", ":SymbolsOutline<CR>", opt)
-
+map("n", "<leader>o", ":SymbolsOutline<CR>", opt)
 -- nvim-tree
 map("n", "<leader>n", ":NvimTreeToggle<CR>", opt)
 -- 列表快捷键

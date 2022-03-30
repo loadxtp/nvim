@@ -10,8 +10,6 @@ end
 local list_keys = require('keybindings').nvimTreeList
 
 nvim_tree.setup({
-    -- 关闭文件时自动关闭
-    auto_close = true,
     -- 不显示 git 状态图标
     git = {
         enable = false
