@@ -10,8 +10,6 @@ local servers = {
   pyright = require("lsp.config.python"),
   clangd = require("lsp.config.cpp"),
   cmake = require("lsp.config.cmake"),
-  remark_ls = require("lsp.config.markdown"),
-  -- jsonls = require("lsp.config.json"),
 }
 
 -- 自动安装 Language Servers
