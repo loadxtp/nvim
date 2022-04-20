@@ -16,14 +16,14 @@ autocmd("BufEnter", {
 })
 
 -- 自动切换输入法
-autocmd("InsertLeave", {
-  group = myAutoGroup,
-  callback = require("utils.im-select").macInsertLeave,
-})
-autocmd("InsertEnter", {
-  group = myAutoGroup,
-  callback = require("utils.im-select").macInsertEnter,
-})
+-- autocmd("InsertLeave", {
+--   group = myAutoGroup,
+--   callback = require("utils.im-select").macInsertLeave,
+-- })
+-- autocmd("InsertEnter", {
+--   group = myAutoGroup,
+--   callback = require("utils.im-select").macInsertEnter,
+-- })
 
 -- 进入Terminal 自动进入插入模式
 autocmd("TermOpen", {
