@@ -258,9 +258,9 @@ pluginKeys.cmp = function(cmp)
 
   return {
     -- 上一个
-    ["<C-k>"] = cmp.mapping.select_prev_item(),
-    -- 下一个
-    ["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+    -- -- 下一个
+    ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
     -- 出现补全
     ["<A-.>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
     -- 取消
