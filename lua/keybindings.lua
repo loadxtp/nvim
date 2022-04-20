@@ -1,4 +1,12 @@
--- leader key 为空
+-- Modes
+--   normal_mode = "n",
+--   insert_mode = "i",
+--   visual_mode = "v",
+--   visual_block_mode = "x",
+--   term_mode = "t",
+--   command_mode = "c",
+
+-- leader key
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
@@ -10,13 +18,11 @@ local opt = {
   silent = true
 }
 
--- Modes
---   normal_mode = "n",
---   insert_mode = "i",
---   visual_mode = "v",
---   visual_block_mode = "x",
---   term_mode = "t",
---   command_mode = "c",
+-- $跳到行尾不带空格 (交换$ 和 g_)
+map("v", "$", "g_", opt)
+map("v", "g_", "$", opt)
+map("n", "$", "g_", opt)
+map("n", "g_", "$", opt)
 
 -- 命令行下 Ctrl+j/k  上一个下一个
 map("c", "<C-j>", "<C-n>", {
@@ -26,9 +32,11 @@ map("c", "<C-k>", "<C-p>", {
   noremap = false
 })
 
+map("n", "<leader>w", ":w<CR>", opt)
+
 -- 上下滚动浏览
-map("n", "<C-j>", "4j", opt)
-map("n", "<C-k>", "4k", opt)
+map("n", "<C-j>", "5j", opt)
+map("n", "<C-k>", "5k", opt)
 
 -- magic search
 map("n", "/", "/\\v", {
@@ -54,17 +62,10 @@ map("v", "p", '"_dP', opt)
 -- map("i", "<C-h>", "<ESC>I", opt)
 -- map("i", "<C-l>", "<ESC>A", opt)
 
--- Terminal相关
--- map("n", "<leader>t", ":sp | terminal<CR>", opt)
--- map("n", "<leader>vt", ":vsp | terminal<CR>", opt)
-map("t", "<Esc>", "<C-\\><C-n>", opt)
-map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]], opt)
-map("t", "<A-j>", [[ <C-\><C-N><C-w>j ]], opt)
-map("t", "<A-k>", [[ <C-\><C-N><C-w>k ]], opt)
-map("t", "<A-l>", [[ <C-\><C-N><C-w>l ]], opt)
-
 ------------------------------------------------------------------
 -- windows 分屏快捷键
+------------------------------------------------------------------
+map("n", "s", "", opt) -- unset s
 map("n", "sv", ":vsp<CR>", opt)
 map("n", "sh", ":sp<CR>", opt)
 -- 关闭当前
@@ -76,7 +77,6 @@ map("n", "<A-h>", "<C-w>h", opt)
 map("n", "<A-j>", "<C-w>j", opt)
 map("n", "<A-k>", "<C-w>k", opt)
 map("n", "<A-l>", "<C-w>l", opt)
-
 -- 左右比例控制
 map("n", "<C-Left>", ":vertical resize -2<CR>", opt)
 map("n", "<C-Right>", ":vertical resize +2<CR>", opt)
@@ -90,9 +90,24 @@ map("n", "<C-Up>", ":resize -2<CR>", opt)
 -- 相等比例
 map("n", "s=", "<C-w>=", opt)
 
+-- Terminal相关
+map("n", "st", ":sp | terminal<CR>", opt)
+map("n", "stv", ":vsp | terminal<CR>", opt)
+-- Esc 回 Normal 模式
+-- map("t", "<Esc>", "<C-\\><C-n>", opt)
+map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]], opt)
+map("t", "<A-j>", [[ <C-\><C-N><C-w>j ]], opt)
+map("t", "<A-k>", [[ <C-\><C-N><C-w>k ]], opt)
+map("t", "<A-l>", [[ <C-\><C-N><C-w>l ]], opt)
+
 --------------------------------------------------------------------
 -- 插件快捷键
+--------------------------------------------------------------------
 local pluginKeys = {}
+
+-- treesitter 折叠
+map("n", "zz", ":foldclose<CR>", opt)
+map("n", "Z", ":foldopen<CR>", opt)
 
 -- symbols-outline
 map("n", "<leader>o", ":SymbolsOutline<CR>", opt)
@@ -100,51 +115,33 @@ map("n", "<leader>o", ":SymbolsOutline<CR>", opt)
 map("n", "<leader>n", ":NvimTreeToggle<CR>", opt)
 -- 列表快捷键
 pluginKeys.nvimTreeList = { -- 打开文件或文件夹
-{
-    key = {"<CR>", "o", "<2-LeftMouse>"},
-    action = "edit"
-  }, -- 分屏打开文件
-{
-    key = "v",
-    action = "vsplit"
-  }, {
-    key = "h",
-    action = "split"
-  }, -- 显示隐藏文件
-{
-    key = "i",
-    action = "toggle_ignored"
-  }, -- Ignore (node_modules)
-{
-    key = ".",
-    action = "toggle_dotfiles"
-  }, -- Hide (dotfiles)
+  { key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
+  -- 分屏打开文件
+  { key = "v", action = "vsplit" },
+  -- 显示隐藏文件
+  { key = "h", action = "split" },
+  -- Ignore (node_modules)
+  { key = "i", action = "toggle_ignored" },
+  -- Hide (dotfiles)
+  { key = ".", action = "toggle_dotfiles" },
   -- 文件操作
-{
-    key = "<F5>",
-    action = "refresh"
-  }, {
-    key = "a",
-    action = "create"
-  }, {
-    key = "d",
-    action = "remove"
-  }, {
-    key = "r",
-    action = "rename"
-  }, {
-    key = "x",
-    action = "cut"
-  }, {
-    key = "c",
-    action = "copy"
-  }, {
-    key = "p",
-    action = "paste"
-  }, {
-    key = "s",
-    action = "system_open"
-  }}
+  { key = "<F5>", action = "refresh" },
+  { key = "a", action = "create" },
+  { key = "d", action = "remove" },
+  { key = "r", action = "rename" },
+  { key = "x", action = "cut" },
+  { key = "c", action = "copy" },
+  { key = "p", action = "paste" },
+  -- 进入下一级
+  { key = { "]" }, action = "cd" },
+  -- 进入上一级
+  { key = { "[" }, action = "dir_up" },
+  -- mac
+  { key = "s", action = "open" },
+  -- windows
+  -- { key = 's', action = 'system_open' },
+}
+
 -- bufferline
 -- 左右Tab切换
 map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
@@ -156,6 +153,8 @@ map("n", "<leader>bl", ":BufferLineCloseRight<CR>", opt)
 map("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opt)
 -- 关闭选中标签页
 map("n", "<leader>bc", ":BufferLinePickClose<CR>", opt)
+-- 关闭其他标签页
+map("n", "<leader>bo", ":BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>", opt)
 
 -- Telescope 列表中 插入模式快捷键
 pluginKeys.telescopeList = {
@@ -190,12 +189,8 @@ pluginKeys.comment = {
   }
 }
 -- ctrl + /
-map("n", "<C-_>", "gcc", {
-  noremap = false
-})
-map("v", "<C-_>", "gcc", {
-  noremap = false
-})
+map("n", "<C-_>", "gcc", { noremap = false })
+map("v", "<C-_>", "gcc", { noremap = false })
 
 -- clangd
 -- <leader> map see which-key.lua
@@ -253,7 +248,6 @@ end
 
 -- nvim-cmp 自动补全
 pluginKeys.cmp = function(cmp)
-
   local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
   end
@@ -321,109 +315,55 @@ pluginKeys.cmp = function(cmp)
   }
 end
 
------ diffview ----
-local status_ok, diffConfig = pcall(require, "diffview.config")
-if status_ok then
-  map("n", "<leader>df", ":DiffviewOpen<CR>", opt)
-  map("n", "<leader>dfc", ":DiffviewClose<CR>", opt)
-  map("n", "<leader>dfh", ":DiffviewFileHistory<CR>", opt)
-  local cb = diffConfig.diffview_callback
-  pluginKeys.diffview = {
-    disable_defaults = false, -- Disable the default key bindings
-    -- The `view` bindings are active in the diff buffers, only when the current
-    -- tabpage is a Diffview.
-    view = {
-      -- ["<tab>"]      = cb("select_next_entry"),  -- Open the diff for the next file
-      -- ["<s-tab>"]    = cb("select_prev_entry"),  -- Open the diff for the previous file
-      -- ["gf"]         = cb("goto_file"),          -- Open the file in a new split in previous tabpage
-      -- ["<C-w><C-f>"] = cb("goto_file_split"),    -- Open the file in a new split
-      -- ["<C-w>gf"]    = cb("goto_file_tab"),      -- Open the file in a new tabpage
-      -- ["<leader>e"]  = cb("focus_files"),        -- Bring focus to the files panel
-      ["<leader>b"] = cb("toggle_files") -- Toggle the files panel.
-    },
-    file_panel = {
-      ["j"] = cb("next_entry"), -- Bring the cursor to the next file entry
-      ["<down>"] = cb("next_entry"),
-      ["k"] = cb("prev_entry"), -- Bring the cursor to the previous file entry.
-      ["<up>"] = cb("prev_entry"),
-      ["<cr>"] = cb("select_entry"), -- Open the diff for the selected entry.
-      ["o"] = cb("select_entry"),
-      ["<2-LeftMouse>"] = cb("select_entry"),
-      ["-"] = cb("toggle_stage_entry"), -- Stage / unstage the selected entry.
-      ["S"] = cb("stage_all"), -- Stage all entries.
-      ["U"] = cb("unstage_all"), -- Unstage all entries.
-      ["X"] = cb("restore_entry"), -- Restore entry to the state on the left side.
-      ["R"] = cb("refresh_files"), -- Update stats and entries in the file list.
-      ["<tab>"] = cb("select_next_entry"),
-      ["<s-tab>"] = cb("select_prev_entry"),
-      ["gf"] = cb("goto_file"),
-      ["<C-w><C-f>"] = cb("goto_file_split"),
-      ["<C-w>gf"] = cb("goto_file_tab"),
-      ["i"] = cb("listing_style"), -- Toggle between 'list' and 'tree' views
-      ["f"] = cb("toggle_flatten_dirs"), -- Flatten empty subdirectories in tree listing style.
-      ["<leader>e"] = cb("focus_files"),
-      ["<leader>b"] = cb("toggle_files")
-    },
-    file_history_panel = {
-      ["g!"] = cb("options"), -- Open the option panel
-      ["<C-A-d>"] = cb("open_in_diffview"), -- Open the entry under the cursor in a diffview
-      ["y"] = cb("copy_hash"), -- Copy the commit hash of the entry under the cursor
-      ["zR"] = cb("open_all_folds"),
-      ["zM"] = cb("close_all_folds"),
-      ["j"] = cb("next_entry"),
-      ["<down>"] = cb("next_entry"),
-      ["k"] = cb("prev_entry"),
-      ["<up>"] = cb("prev_entry"),
-      ["<cr>"] = cb("select_entry"),
-      ["o"] = cb("select_entry"),
-      ["<2-LeftMouse>"] = cb("select_entry"),
-      ["<tab>"] = cb("select_next_entry"),
-      ["<s-tab>"] = cb("select_prev_entry"),
-      ["gf"] = cb("goto_file"),
-      ["<C-w><C-f>"] = cb("goto_file_split"),
-      ["<C-w>gf"] = cb("goto_file_tab"),
-      ["<leader>e"] = cb("focus_files"),
-      ["<leader>b"] = cb("toggle_files")
-    },
-    option_panel = {
-      ["<tab>"] = cb("select"),
-      ["q"] = cb("close")
-    }
-  }
-end
-
 -- gitsigns
-pluginKeys.gitsigns = {
-  -- Default keymap options
-  noremap = true,
+pluginKeys.gitsigns_on_attach = function(bufnr)
+  local gs = package.loaded.gitsigns
 
-  ["n <leader>hj"] = {
-    expr = true,
-    "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'"
-  },
-  ["n <leader>hk"] = {
-    expr = true,
-    "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'"
-  },
+  local function map(mode, l, r, opts)
+    opts = opts or {}
+    opts.buffer = bufnr
+    vim.keymap.set(mode, l, r, opts)
+  end
 
-  -- stage
-  ["n <leader>hs"] = "<cmd>Gitsigns stage_hunk<CR>",
-  ["v <leader>hs"] = ":Gitsigns stage_hunk<CR>",
-  ["n <leader>hu"] = "<cmd>Gitsigns undo_stage_hunk<CR>",
-  ["n <leader>hS"] = "<cmd>Gitsigns stage_buffer<CR>",
-  ["n <leader>hU"] = "<cmd>Gitsigns reset_buffer_index<CR>",
+  -- Navigation
+  map("n", "<leader>gj", function()
+    if vim.wo.diff then
+      return "]c"
+    end
+    vim.schedule(function()
+      gs.next_hunk()
+    end)
+    return "<Ignore>"
+  end, { expr = true })
 
-  -- reset
-  ["n <leader>hr"] = "<cmd>Gitsigns reset_hunk<CR>",
-  ["v <leader>hr"] = ":Gitsigns reset_hunk<CR>",
-  ["n <leader>hR"] = "<cmd>Gitsigns reset_buffer<CR>",
+  map("n", "<leader>gk", function()
+    if vim.wo.diff then
+      return "[c"
+    end
+    vim.schedule(function()
+      gs.prev_hunk()
+    end)
+    return "<Ignore>"
+  end, { expr = true })
 
-  ["n <leader>hp"] = "<cmd>Gitsigns preview_hunk<CR>",
-  ["n <leader>hb"] = '<cmd>lua require"gitsigns".blame_line{full=false}<CR>',
-
-  -- Text objects
-  ["o ih"] = ":<C-U>Gitsigns select_hunk<CR>",
-  ["x ih"] = ":<C-U>Gitsigns select_hunk<CR>"
-}
+  map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>")
+  map("n", "<leader>gS", gs.stage_buffer)
+  map("n", "<leader>gu", gs.undo_stage_hunk)
+  map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>")
+  map("n", "<leader>gR", gs.reset_buffer)
+  map("n", "<leader>gp", gs.preview_hunk)
+  map("n", "<leader>gb", function()
+    gs.blame_line({ full = true })
+  end)
+  map("n", "<leader>gd", gs.diffthis)
+  map("n", "<leader>gD", function()
+    gs.diffthis("~")
+  end)
+  -- toggle
+  map("n", "<leader>gtd", gs.toggle_deleted)
+  map("n", "<leader>gtb", gs.toggle_current_line_blame)
+  -- Text object
+  map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>")
+end
 
 return pluginKeys

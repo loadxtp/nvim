@@ -6,6 +6,7 @@ local lsp_installer = require("nvim-lsp-installer")
 -- https://github.com/williamboman/nvim-lsp-installer#available-lsps
 local servers = {
   sumneko_lua = require("lsp.config.lua"), -- lua/lsp/config/lua.lua
+  bashls = require("lsp.config.bash"),
   rust_analyzer = require("lsp.config.rust"),
   pyright = require("lsp.config.python"),
   clangd = require("lsp.config.cpp"),
@@ -28,9 +29,11 @@ lsp_installer.on_server_ready(function(server)
   if config == nil then
     return
   end
-  if config.on_setup then
+  if type(config) == "table" and config.on_setup then
+    -- 自定义初始化配置文件必须实现on_setup 方法
     config.on_setup(server)
   else
+    -- 使用默认参数
     server:setup({})
   end
 end)

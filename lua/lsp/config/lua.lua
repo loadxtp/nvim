@@ -41,8 +41,6 @@ local opts = {
     -- local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
     -- 绑定快捷键
     require("keybindings").mapLSP(buf_set_keymap)
-    -- 保存时自动格式化
-    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
   end,
 }
 
@@ -54,6 +52,7 @@ local opts = {
 -- print(vim.inspect(server))
 return {
   on_setup = function(server)
+    opts = require("lua-dev").setup({ lspconfig = opts })
     server:setup(opts)
   end,
 }

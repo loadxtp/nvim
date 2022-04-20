@@ -6,8 +6,14 @@ local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 local paccker_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
   vim.notify("正在安装Pakcer.nvim，请稍后...")
-  paccker_bootstrap = fn.system({"git", "clone", "--depth", "1", -- "https://github.com/wbthomason/packer.nvim",
-    "https://gitcode.net/mirrors/wbthomason/packer.nvim", install_path})
+  paccker_bootstrap = fn.system({
+    "git",
+    "clone",
+    "--depth",
+    "1", "https://github.com/wbthomason/packer.nvim",
+    -- "https://gitcode.net/mirrors/wbthomason/packer.nvim",
+    install_path,
+  })
 
   -- https://github.com/wbthomason/packer.nvim/issues/750
   local rtp_addition = vim.fn.stdpath("data") .. "/site/pack/*/start/*"
@@ -68,7 +74,10 @@ packer.startup({
     -- symbols-outline
     use ("simrat39/symbols-outline.nvim")
     -- toggleterm
-    use("akinsho/toggleterm.nvim")
+    use({
+      "akinsho/toggleterm.nvim",
+      branch = 'main'
+    })
     -- surround
     use("ur4ltz/surround.nvim")
     -- neoscroll
@@ -81,6 +90,8 @@ packer.startup({
     use("folke/which-key.nvim")
     -- rust-tools
     use("simrat39/rust-tools.nvim")
+    -- git
+    use({ "lewis6991/gitsigns.nvim" })
 
     --------------------- LSP --------------------
     -- lspconfig
@@ -95,14 +106,20 @@ packer.startup({
     use("hrsh7th/cmp-buffer") -- { name = 'buffer' },
     use("hrsh7th/cmp-path") -- { name = 'path' }
     use("hrsh7th/cmp-cmdline") -- { name = 'cmdline' }
+    use("hrsh7th/cmp-nvim-lsp-signature-help") -- { name = 'nvim_lsp_signature_help' }
     -- 常见编程语言代码段
     use("rafamadriz/friendly-snippets")
-    -- ui
+    -- UI增强
     use("onsails/lspkind-nvim")
-    use({
-      "tami5/lspsaga.nvim",
-      -- branch = 'nvim6.0'
-    })
+    use("tami5/lspsaga.nvim")
+    -- 代码格式化
+    use("mhartington/formatter.nvim")
+    use({ "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" })
+    use({ "jose-elias-alvarez/nvim-lsp-ts-utils", requires = "nvim-lua/plenary.nvim" })
+    -- Lua 增强
+    use("folke/lua-dev.nvim")
+    -- JSON 增强
+    use("b0o/schemastore.nvim")
 
     --------------------- colorschemes --------------------
     -- tokyonight
@@ -147,10 +164,13 @@ packer.startup({
 })
 
 -- 每次保存 plugins.lua 自动安装插件
-pcall(vim.cmd, [[
-augroup packer_user_config
-autocmd!
-autocmd BufWritePost plugins.lua source <afile> | PackerSync
-augroup end
-]])
-
+-- move to autocmds.lua
+-- pcall(
+--   vim.cmd,
+--   [[
+-- augroup packer_user_config
+-- autocmd!
+-- autocmd BufWritePost plugins.lua source <afile> | PackerSync
+-- augroup end
+-- ]]
+-- )
