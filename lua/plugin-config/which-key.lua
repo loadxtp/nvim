@@ -26,7 +26,7 @@ local mappings = {
     a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action" },
     e = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "Show line diagnostic" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "Set loclist" },
-    f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format" },
+    f = { "<cmd>Format<CR>", "Format" },
   },
   a = { ":ClangdSwitchSourceHeader<CR>", "ClangdSwitchSourceHeader" },
 }

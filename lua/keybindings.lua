@@ -15,7 +15,7 @@ local map = vim.api.nvim_set_keymap
 
 local opt = {
   noremap = true,
-  silent = true
+  silent = true,
 }
 
 -- $跳到行尾不带空格 (交换$ 和 g_)
@@ -26,10 +26,10 @@ map("n", "g_", "$", opt)
 
 -- 命令行下 Ctrl+j/k  上一个下一个
 map("c", "<C-j>", "<C-n>", {
-  noremap = false
+  noremap = false,
 })
 map("c", "<C-k>", "<C-p>", {
-  noremap = false
+  noremap = false,
 })
 
 map("n", "<leader>w", ":w<CR>", opt)
@@ -41,11 +41,11 @@ map("n", "<C-k>", "5k", opt)
 -- magic search
 map("n", "/", "/\\v", {
   noremap = true,
-  silent = false
+  silent = false,
 })
 map("v", "/", "/\\v", {
   noremap = true,
-  silent = false
+  silent = false,
 })
 
 -- visual模式下缩进代码
@@ -58,9 +58,8 @@ map("v", "K", ":move '<-2<CR>gv-gv", opt)
 -- 在visual mode 里粘贴不要复制
 map("v", "p", '"_dP', opt)
 
--- insert 模式下，跳到行首行尾
--- map("i", "<C-h>", "<ESC>I", opt)
--- map("i", "<C-l>", "<ESC>A", opt)
+-- insert 模式
+map("i", "jj", "<ESC>l", opt)
 
 ------------------------------------------------------------------
 -- windows 分屏快捷键
@@ -172,8 +171,8 @@ pluginKeys.telescopeList = {
     ["<C-c>"] = "close",
     -- 预览窗口上下滚动
     ["<C-u>"] = "preview_scrolling_up",
-    ["<C-d>"] = "preview_scrolling_down"
-  }
+    ["<C-d>"] = "preview_scrolling_down",
+  },
 }
 
 -- 代码注释插件
@@ -181,12 +180,12 @@ pluginKeys.telescopeList = {
 pluginKeys.comment = {
   toggler = {
     line = "gcc",
-    block = "gbc"
+    block = "gbc",
   },
   opleader = {
     line = "gc",
-    bock = "gb"
-  }
+    bock = "gb",
+  },
 }
 -- ctrl + /
 map("n", "<C-_>", "gcc", { noremap = false })
@@ -233,7 +232,7 @@ pluginKeys.mapLSP = function(mapbuf)
   mapbuf("n", "gk", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opt)
   --]]
   -- diagnostic
-  mapbuf("n", "gp", "<cmd>Lspsaga show_line_diagnostics<CR>",opt)
+  mapbuf("n", "gp", "<cmd>Lspsaga show_line_diagnostics<CR>", opt)
   mapbuf("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", opt)
   mapbuf("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opt)
   -- 未用
@@ -258,40 +257,40 @@ pluginKeys.cmp = function(cmp)
 
   return {
     -- 上一个
-    ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
-    ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+    ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+    ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
     -- -- 下一个
-    ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
-    ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+    ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+    ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
     -- 出现补全
-    ["<A-.>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
+    ["<A-.>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
     -- 取消
     ["<A-,>"] = cmp.mapping({
       i = cmp.mapping.abort(),
-      c = cmp.mapping.close()
+      c = cmp.mapping.close(),
     }),
     -- 确认
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
     ["<CR>"] = cmp.mapping.confirm({
       select = true,
-      behavior = cmp.ConfirmBehavior.Replace
+      behavior = cmp.ConfirmBehavior.Replace,
     }),
     -- ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     -- 如果窗口内容太多，可以滚动
-    ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), {"i", "c"}),
-    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), {"i", "c"}),
+    ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
     -- snippets 跳转
     ["<C-l>"] = cmp.mapping(function(_)
       if vim.fn["vsnip#available"](1) == 1 then
         feedkey("<Plug>(vsnip-expand-or-jump)", "")
       end
-    end, {"i", "s"}),
+    end, { "i", "s" }),
     ["<C-h>"] = cmp.mapping(function()
       if vim.fn["vsnip#jumpable"](-1) == 1 then
         feedkey("<Plug>(vsnip-jump-prev)", "")
       end
-    end, {"i", "s"}),
+    end, { "i", "s" }),
 
     -- super Tab
     ["<Tab>"] = cmp.mapping(function(fallback)
@@ -304,7 +303,7 @@ pluginKeys.cmp = function(cmp)
       else
         fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
       end
-    end, {"i", "s"}),
+    end, { "i", "s" }),
 
     ["<S-Tab>"] = cmp.mapping(function()
       if cmp.visible() then
@@ -312,7 +311,7 @@ pluginKeys.cmp = function(cmp)
       elseif vim.fn["vsnip#jumpable"](-1) == 1 then
         feedkey("<Plug>(vsnip-jump-prev)", "")
       end
-    end, {"i", "s"})
+    end, { "i", "s" }),
     -- end of super Tab
   }
 end
