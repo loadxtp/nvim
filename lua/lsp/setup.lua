@@ -14,12 +14,17 @@ local servers = {
 }
 
 -- 自动安装 Language Servers
-for name, _ in pairs(servers) do
+for name, config in pairs(servers) do
   local server_is_found, server = lsp_installer.get_server(name)
   if server_is_found then
     if not server:is_installed() then
       print("Installing " .. name)
       server:install()
+    else
+      if type(config) == "table" and config.on_init then
+        config.on_init(server)
+        print("onInit " .. type(config))
+      end
     end
   end
 end

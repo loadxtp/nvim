@@ -52,6 +52,7 @@ cmp.setup.cmdline("/", {
 -- Use cmdline & path source for ':'.
 cmp.setup.cmdline(":", {
   sources = cmp.config.sources({
+    mapping = cmp.mapping.preset.cmdline(),
     { name = "path" },
   }, {
     { name = "cmdline" },

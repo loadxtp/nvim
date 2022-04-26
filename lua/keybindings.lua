@@ -32,8 +32,6 @@ map("c", "<C-k>", "<C-p>", {
   noremap = false,
 })
 
-map("n", "<leader>w", ":w<CR>", opt)
-
 -- 上下滚动浏览
 map("n", "<C-j>", "5j", opt)
 map("n", "<C-k>", "5k", opt)
@@ -243,6 +241,35 @@ pluginKeys.mapLSP = function(mapbuf)
   -- mapbuf('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opt)
   -- mapbuf('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opt)
   -- mapbuf('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opt)
+end
+
+-- nvim-dap
+pluginKeys.mapDAP = function()
+  -- 开始
+  map("n", "<leader>dd", ":RustDebuggables<CR>", opt)
+  -- 结束
+  map(
+    "n",
+    "<leader>de",
+    ":lua require'dap'.close()<CR>"
+      .. ":lua require'dap'.terminate()<CR>"
+      .. ":lua require'dap.repl'.close()<CR>"
+      .. ":lua require'dapui'.close()<CR>"
+      .. ":lua require('dap').clear_breakpoints()<CR>"
+      .. "<C-w>o<CR>",
+    opt
+  )
+  -- 继续
+  map("n", "<leader>dc", ":lua require'dap'.continue()<CR>", opt)
+  -- 设置断点
+  map("n", "<leader>dt", ":lua require('dap').toggle_breakpoint()<CR>", opt)
+  map("n", "<leader>dT", ":lua require('dap').clear_breakpoints()<CR>", opt)
+  --  stepOver, stepOut, stepInto
+  map("n", "<leader>dj", ":lua require'dap'.step_over()<CR>", opt)
+  map("n", "<leader>dk", ":lua require'dap'.step_out()<CR>", opt)
+  map("n", "<leader>dl", ":lua require'dap'.step_into()<CR>", opt)
+  -- 弹窗
+  map("n", "<leader>dh", ":lua require'dapui'.eval()<CR>", opt)
 end
 
 -- nvim-cmp 自动补全

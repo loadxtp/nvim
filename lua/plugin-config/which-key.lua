@@ -29,5 +29,6 @@ local mappings = {
     f = { "<cmd>Format<CR>", "Format" },
   },
   a = { ":ClangdSwitchSourceHeader<CR>", "ClangdSwitchSourceHeader" },
+  cs = { ":DashboardChangeColorscheme<CR>", "Change colorscheme" },
 }
 wk.register(mappings, { prefix = "<leader>" })

@@ -20,7 +20,6 @@ require("plugin-config.nvim-autopairs")
 require("plugin-config.nvim-tree")
 require("plugin-config.nvim-treesitter")
 require("plugin-config.project")
-require("plugin-config.rust-tools")
 require("plugin-config.surround")
 require("plugin-config.symbols-outline")
 require("plugin-config.telescope")
@@ -34,8 +33,10 @@ require("lsp.formatter")
 require("lsp.null-ls")
 require("lsp.ui")
 
+-- Debugger(dap)
+-- require("dap/nvim-dap") -- TODO
+
 -- utils
--- require("utils.change-colorscheme")
 -- 复制到windows剪贴板
 -- require("utils.fix-yank")
 -- require("utils.global")
