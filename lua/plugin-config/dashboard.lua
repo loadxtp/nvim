@@ -1,16 +1,15 @@
 vim.g.dashboard_default_executive = "telescope"
-vim.g.dashboard_custom_footer = { " https://github.com/loadxtp" }
 
 vim.g.dashboard_custom_section = {
   a = { description = { "  Projects              " }, command = "Telescope projects" },
-  b = { description = { "  Recently files        " }, command = "Telescope oldfiles" },
-  c = {
+  b = {
     description = { "  Edit Projects         " },
     command = "edit ~/.local/share/nvim/project_nvim/project_history",
   },
-  d = { description = { "  Find file             " }, command = "Telescope find_files" },
-  e = { description = { "  Find text             " }, command = "Telescope live_grep" },
-  f = { description = { "  Change colorscheme    " }, command = "DashboardChangeColorscheme" },
+  c = { description = { "  Change colorscheme    " }, command = "DashboardChangeColorscheme" },
+  d = { description = { "  Recently files        " }, command = "Telescope oldfiles" },
+  e = { description = { "  Find file             " }, command = "Telescope find_files" },
+  f = { description = { "  Find text             " }, command = "Telescope live_grep" },
   -- g = { description = { "  Edit .bashrc          " }, command = "edit ~/.bashrc" },
   -- h = { description = { "  Edit keybindings      " }, command = "edit ~/.config/nvim/lua/keybindings.lua" },
 }
@@ -23,4 +22,17 @@ vim.g.dashboard_custom_header = {
   [[ ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║]],
   [[ ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
   [[                                                   ]],
+}
+
+vim.g.dashboard_custom_footer = {
+  [[  ________________  ]],
+  [[ | Hakuna Matata~ | ]],
+  [[  ----------------  ]],
+  [[  O                 ]],
+  [[   O   ^__^             ]],
+  [[    O  (oo)\_______     ]],
+  [[       (__)\       )\/\ ]],
+  [[           ||----w |    ]],
+  [[           ||     ||    ]],
+  [[                        ]],
 }
