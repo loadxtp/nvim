@@ -34,7 +34,7 @@ nvim_tree.setup({
   -- 不显示 git 状态图标
   git = {
     enable = true,
-    ignore = true,
+    ignore = false,
     timeout = 400,
   },
   -- project plugin 需要这样设置
@@ -58,10 +58,10 @@ nvim_tree.setup({
   filters = {
     dotfiles = false,
     custom = {
-      ".DS_Store$",
-      ".cache$",
-      ".git$",
-      ".vscode$",
+      "^.DS_Store$",
+      "^.cache$",
+      "^.git$",
+      "^.vscode$",
     },
   },
   view = {
