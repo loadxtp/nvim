@@ -9,10 +9,33 @@ end
 -- 列表操作快捷键
 local list_keys = require("keybindings").nvimTreeList
 
+vim.g.nvim_tree_icons = {
+  default = "",
+  symlink = "",
+  git = {
+    unstaged = "",
+    staged = "S",
+    unmerged = "",
+    renamed = "➜",
+    deleted = "",
+    untracked = "U",
+    ignored = "◌",
+  },
+  folder = {
+    default = "",
+    open = "",
+    empty = "",
+    empty_open = "",
+    symlink = "",
+  },
+}
+
 nvim_tree.setup({
   -- 不显示 git 状态图标
   git = {
-    enable = false,
+    enable = true,
+    ignore = true,
+    timeout = 400,
   },
   -- project plugin 需要这样设置
   update_cwd = true,
@@ -20,10 +43,26 @@ nvim_tree.setup({
     enable = true,
     update_cwd = true,
   },
-  -- 隐藏 .文件 和 node_modules 文件夹
+  -- 提示信息
+  diagnostics = {
+    enable = true,
+    show_on_dirs = true,
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    },
+  },
+  -- 隐藏文件夹
   filters = {
-    dotfiles = true,
-    custom = { "node_modules" },
+    dotfiles = false,
+    custom = {
+      ".DS_Store$",
+      ".cache$",
+      ".git$",
+      ".vscode$",
+    },
   },
   view = {
     -- 宽度

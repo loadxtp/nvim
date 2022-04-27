@@ -23,7 +23,6 @@ local mappings = {
     l = { "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", "List workspace" },
     D = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Type definition" },
     r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-    a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action" },
     e = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "Show line diagnostic" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "Set loclist" },
     f = { "<cmd>Format<CR>", "Format" },
