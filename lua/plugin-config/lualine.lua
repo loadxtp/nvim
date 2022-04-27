@@ -87,13 +87,15 @@ lualine.setup({
     globalstatus = true,
     -- disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
     -- 分割线
-    component_separators = { left = "|", right = "|" },
-    section_separators = {
-      left = " ",
-      right = "",
-    },
+    -- section_separators = { left = " ", right = "" },
+    section_separators = { left = "", right = "" },
+    component_separators = { left = "", right = "" },
   },
-  extensions = { "nvim-tree" },
+  extensions = {
+    "nvim-tree",
+    "symbols-outline",
+    "toggleterm",
+  },
   sections = {
     lualine_a = { branch, diagnostics },
     lualine_b = { mode },
