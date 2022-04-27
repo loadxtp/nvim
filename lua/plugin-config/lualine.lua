@@ -86,7 +86,6 @@ lualine.setup({
     always_divide_middle = true,
     globalstatus = true,
     -- disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
-    disabled_filetypes = { "alpha", "dashboard" },
     -- 分割线
     component_separators = { left = "|", right = "|" },
     section_separators = {
