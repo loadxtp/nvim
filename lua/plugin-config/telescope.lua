@@ -12,7 +12,7 @@ telescope.setup({
     -- vertical , center , cursor
     layout_strategy = "horizontal",
     -- 窗口内快捷键
-    mappings = require("keybindings").telescopeList,
+    mappings = require("keybindings").map_telescope,
   },
   pickers = {
     find_files = {

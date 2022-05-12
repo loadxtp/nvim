@@ -104,6 +104,10 @@ packer.startup({
     --------------------- LSP --------------------
     -- lspconfig
     use({ "neovim/nvim-lspconfig", "williamboman/nvim-lsp-installer" })
+    -- UI增强
+    use("onsails/lspkind-nvim")
+    use("tami5/lspsaga.nvim")
+    use("j-hui/fidget.nvim") -- standalone UI for nvim-lsp progress
     -- 补全引擎
     use("hrsh7th/nvim-cmp")
     -- snippet 引擎
@@ -117,9 +121,6 @@ packer.startup({
     use("hrsh7th/cmp-nvim-lsp-signature-help") -- { name = 'nvim_lsp_signature_help' }
     -- 常见编程语言代码段
     use("rafamadriz/friendly-snippets")
-    -- UI增强
-    use("onsails/lspkind-nvim")
-    use("tami5/lspsaga.nvim")
     -- 代码格式化
     use("mhartington/formatter.nvim")
     use({ "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" })

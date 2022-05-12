@@ -34,12 +34,12 @@ cmp.setup({
     -- { name = 'ultisnips' },
     -- -- For snippy users.
     -- { name = 'snippy' },
-  }, {  { name = "path" } }),
+  }, { { name = "path" } }),
 
   -- 快捷键
-  mapping = require("keybindings").cmp(cmp),
+  mapping = require("keybindings").map_cmp(cmp),
   -- 使用lspkind-nvim显示类型图标
-  formatting = require('lsp.ui').formatting
+  formatting = require("lsp.ui").formatting,
 })
 
 -- Use buffer source for `/`.

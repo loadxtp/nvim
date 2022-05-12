@@ -7,7 +7,7 @@ if not status then
 end
 
 -- 列表操作快捷键
-local list_keys = require("keybindings").nvimTreeList
+local list_keys = require("keybindings").map_nvim_tree
 
 vim.g.nvim_tree_icons = {
   default = "",
@@ -31,6 +31,8 @@ vim.g.nvim_tree_icons = {
 }
 
 nvim_tree.setup({
+  -- 完全禁止内置netrw
+  disable_netrw = true,
   -- 不显示 git 状态图标
   git = {
     enable = true,
@@ -66,7 +68,7 @@ nvim_tree.setup({
   },
   view = {
     -- 宽度
-    width = 36,
+    width = 34,
     -- 也可以 'right'
     side = "left",
     -- 隐藏根目录

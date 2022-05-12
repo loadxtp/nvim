@@ -12,12 +12,12 @@ local opts = {
 
     -- local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
     -- 绑定快捷键
-    require("keybindings").mapLSP(buf_set_keymap)
+    require("keybindings").map_lsp(buf_set_keymap)
   end,
 }
 
 return {
   on_setup = function(server)
-    server:setup(opts)
+    server.setup(opts)
   end,
 }
