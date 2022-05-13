@@ -63,6 +63,7 @@ local defaults = {
     -- Tab switch buffer
     ["<S-l>"] = ":BufferLineCycleNext<CR>",
     ["<S-h>"] = ":BufferLineCyclePrev<CR>",
+    ["<S-q>"] = ":BufferLinePickClose<CR>",
 
     -- Move current line / block with Alt-j/k a la vscode.
     ["<A-j>"] = ":m .+1<CR>==",
@@ -71,7 +72,7 @@ local defaults = {
     -- QuickFix
     ["]q"] = ":cnext<CR>",
     ["[q"] = ":cprev<CR>",
-    ["<C-q>"] = ":call QuickFixToggle()<CR>",
+    ["<C-q>"] = ":lua vim.lsp.diagnostic.set_qflist()<CR>",
 
     -- treesitter 折叠
     ["zz"] = ":foldclose<CR>",
