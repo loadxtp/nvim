@@ -72,7 +72,7 @@ local defaults = {
     -- QuickFix
     ["]q"] = ":cnext<CR>",
     ["[q"] = ":cprev<CR>",
-    ["<C-q>"] = ":lua vim.lsp.diagnostic.set_qflist()<CR>",
+    ["<C-q>"] = ":lua vim.diagnostic.setqflist()<CR>",
 
     -- treesitter 折叠
     ["zz"] = ":foldclose<CR>",
