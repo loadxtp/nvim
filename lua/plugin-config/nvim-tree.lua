@@ -9,27 +9,6 @@ end
 -- 列表操作快捷键
 local list_keys = require("keybindings").map_nvim_tree
 
-vim.g.nvim_tree_icons = {
-  default = "",
-  symlink = "",
-  git = {
-    unstaged = "",
-    staged = "S",
-    unmerged = "",
-    renamed = "➜",
-    deleted = "",
-    untracked = "U",
-    ignored = "◌",
-  },
-  folder = {
-    default = "",
-    open = "",
-    empty = "",
-    empty_open = "",
-    symlink = "",
-  },
-}
-
 nvim_tree.setup({
   -- 完全禁止内置netrw
   disable_netrw = true,
@@ -38,6 +17,30 @@ nvim_tree.setup({
     enable = true,
     ignore = false,
     timeout = 400,
+  },
+  renderer = {
+    icons = {
+      glyphs = {
+        default = "",
+        symlink = "",
+        git = {
+          unstaged = "",
+          staged = "S",
+          unmerged = "",
+          renamed = "➜",
+          deleted = "",
+          untracked = "U",
+          ignored = "◌",
+        },
+        folder = {
+          default = "",
+          open = "",
+          empty = "",
+          empty_open = "",
+          symlink = "",
+        },
+      },
+    },
   },
   -- project plugin 需要这样设置
   update_cwd = true,
