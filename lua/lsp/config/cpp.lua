@@ -2,6 +2,16 @@ local opts = {
   flags = {
     debounce_text_changes = 150,
   },
+  cmd = {
+    "clangd",
+    "-pretty",
+    "-log=verbose",
+    "--clang-tidy",
+    "--background-index",
+    "--pch-storage=memory",
+    "--header-insertion=never",
+    "--completion-style=detailed",
+  },
   on_attach = function(client, bufnr)
     -- 禁用格式化功能，交给专门插件插件处理
     client.server_capabilities.document_formatting = false

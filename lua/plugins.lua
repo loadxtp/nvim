@@ -94,6 +94,8 @@ packer.startup({
     use("simrat39/rust-tools.nvim")
     -- git
     use({ "lewis6991/gitsigns.nvim" })
+    -- notify
+    use({ "rcarriga/nvim-notify" })
 
     --------------------- Debugger(DAP) --------------------
     use("Pocco81/dap-buddy.nvim") -- DAPInstall, 暂时还不可用

@@ -66,11 +66,9 @@ local default_opts = {
   },
 
   ---Pre-hook, called before commenting the line
-  ---@type fun(ctx: Ctx):string
   pre_hook = nil,
 
   ---Post-hook, called after commenting is done
-  ---@type fun(ctx: Ctx)
   post_hook = nil,
 }
 

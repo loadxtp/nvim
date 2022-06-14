@@ -1,20 +1,18 @@
-vim.g.dashboard_default_executive = "telescope"
+local db = require('dashboard')
 
-vim.g.dashboard_custom_section = {
-  a = { description = { "  Projects              " }, command = "Telescope projects" },
-  b = {
-    description = { "  Edit Projects         " },
-    command = "edit ~/.local/share/nvim/project_nvim/project_history",
-  },
-  c = { description = { "  Change colorscheme    " }, command = "DashboardChangeColorscheme" },
-  d = { description = { "  Recently files        " }, command = "Telescope oldfiles" },
-  e = { description = { "  Find file             " }, command = "Telescope find_files" },
-  f = { description = { "  Find text             " }, command = "Telescope live_grep" },
-  -- g = { description = { "  Edit .bashrc          " }, command = "edit ~/.bashrc" },
-  -- h = { description = { "  Edit keybindings      " }, command = "edit ~/.config/nvim/lua/keybindings.lua" },
+vim.g.dashboard_default_executive = "telescope"
+vim.g.indentLine_fileTypeExclude = { 'dashboard' }
+
+db.custom_center = {
+  { icon = '   ', desc = 'Projects       ', shortcut = '<leader> f p', action = "Telescope projects" },
+  { icon = '   ', desc = 'Edit Projects  ', shortcut = '<leader> f P', action = "edit ~/.local/share/nvim/project_nvim/project_history" },
+  { icon = '   ', desc = 'Colorscheme    ', shortcut = '<leader> f c', action = "Telescope colorscheme" },
+  { icon = '   ', desc = 'Recently file  ', shortcut = '<leader> f r', action = "Telescope oldfiles" },
+  { icon = '   ', desc = 'Find file      ', shortcut = '<leader> f f', action = "Telescope find_files" },
+  { icon = '   ', desc = 'Find text      ', shortcut = '<leader> f t', action = "Telescope live_grep" },
 }
 
-vim.g.dashboard_custom_header = {
+db.custom_header = {
   [[ ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗]],
   [[ ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║]],
   [[ ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║]],
@@ -24,7 +22,7 @@ vim.g.dashboard_custom_header = {
   [[                                                   ]],
 }
 
-vim.g.dashboard_custom_footer = {
+db.custom_footer = {
   [[  ________________  ]],
   [[ | Hakuna Matata~ | ]],
   [[  ----------------  ]],

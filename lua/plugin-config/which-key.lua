@@ -228,6 +228,9 @@ M.config = {
       t = { "<cmd>Telescope live_grep<cr>", "Text" },
       k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
       C = { "<cmd>Telescope commands<cr>", "Commands" },
+      n = { "<cmd>Telescope notify<cr>", "Notify" },
+      p = { "<cmd>Telescope projects<cr>", "Projects" },
+      P = { "<cmd>edit ~/.local/share/nvim/project_nvim/project_history<cr>", "Edit Projects" },
     },
     t = {
       name = "ToggleTerm",
