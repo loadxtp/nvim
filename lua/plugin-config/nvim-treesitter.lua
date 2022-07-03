@@ -9,6 +9,7 @@ treesitter.setup({
   -- :TSInstallInfo 命令查看支持的语言
   -- ensure_installed = { "json", "html", "css", "vim", "lua", "javascript", "typescript", "tsx" },
   ensure_installed = "all",
+  ignore_install = { "phpdoc" },
 
   -- 启用代码高亮模块
   highlight = {
