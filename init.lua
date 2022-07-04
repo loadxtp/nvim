@@ -38,5 +38,5 @@ require("lsp.ui")
 
 -- utils
 -- 复制到windows剪贴板
-require("utils.fix-yank")
+-- require("utils.fix-yank")
 -- require("utils.global")
